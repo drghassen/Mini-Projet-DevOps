@@ -1,0 +1,19 @@
+services:
+  web:
+    build: .
+    volumes:
+      - .:/app
+      - django_db_data:/app/db.sqlite3
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=1
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  django_db_data:
