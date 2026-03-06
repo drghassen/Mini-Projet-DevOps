@@ -1,0 +1,40 @@
+{% extends 'etudiants/base.html' %}
+
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-header bg-white">
+        <h2 class="mb-0">Ajouter un Étudiant</h2>
+    </div>
+    <div class="card-body">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="nom" class="form-label">Nom</label>
+                <input type="text" class="form-control" id="nom" name="nom" required>
+            </div>
+            <div class="mb-3">
+                <label for="prenom" class="form-label">Prénom</label>
+                <input type="text" class="form-control" id="prenom" name="prenom" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="filiere" class="form-label">Filière</label>
+                <select class="form-select" id="filiere" name="filiere" required>
+                    <option value="">Choisir...</option>
+                    <option value="Informatique">Informatique</option>
+                    <option value="Réseaux">Réseaux</option>
+                    <option value="Sécurité">Sécurité</option>
+                    <option value="Développement">Développement</option>
+                </select>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a href="{% url 'liste_etudiants' %}" class="btn btn-secondary me-md-2">Annuler</a>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
