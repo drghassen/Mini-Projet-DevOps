@@ -4,8 +4,8 @@ FROM python:3.12-slim AS builder
 WORKDIR /app
 
 # Empêcher Python de générer des fichiers .pyc
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 # Installer les dépendances de build
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -22,8 +22,9 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-# Créer un utilisateur non-root pour la sécurité
-RUN groupadd -r django && useradd -r -g django django
+# Créer un utilisateur non-root et le dossier de données
+RUN groupadd -r django && useradd -r -g django django && \
+    mkdir -p /app/data && chown -R django:django /app/data
 
 # Copier les dépendances installées du builder
 COPY --from=builder /install /usr/local
@@ -32,8 +33,8 @@ COPY --from=builder /install /usr/local
 COPY --chown=django:django . .
 
 # Variables d'environnement pour le fonctionnement
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 # Basculer vers l'utilisateur non-root
 USER django
