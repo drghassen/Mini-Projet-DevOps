@@ -3,11 +3,14 @@ services:
     build: .
     volumes:
       - .:/app
-      - django_db_data:/app/db.sqlite3
+      - django_db_data:/app/data
     ports:
       - "8000:8000"
     environment:
       - DEBUG=1
+      - PYTHONDONTWRITEBYTECODE=1
+      - PYTHONUNBUFFERED=1
+    command: python manage.py runserver 0.0.0.0:8000
     networks:
       - app-network
 
