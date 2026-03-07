@@ -39,6 +39,9 @@ ENV PYTHONUNBUFFERED=1
 # Basculer vers l'utilisateur non-root
 USER django
 
+# Collecter les fichiers statiques (nécessaire pour Whitenoise)
+RUN python manage.py collectstatic --noinput
+
 # Exposer le port par défaut de Django
 EXPOSE 8000
 

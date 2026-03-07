@@ -23,3 +23,5 @@ ENV/
 
 # Docker
 .dockerignore
+.vscode/
+gunicorn.ctl

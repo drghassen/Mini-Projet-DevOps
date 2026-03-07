@@ -8,8 +8,10 @@ services:
       - "8000:8000"
     environment:
       - DEBUG=1
+      - SECRET_KEY=django-insecure-dev-key-change-in-production
       - PYTHONDONTWRITEBYTECODE=1
       - PYTHONUNBUFFERED=1
+
     command: python manage.py runserver 0.0.0.0:8000
     networks:
       - app-network
